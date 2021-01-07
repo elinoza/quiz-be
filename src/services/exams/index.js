@@ -10,11 +10,15 @@ try{
   const exams = await getexams()
   const questions = await getquestions()
   let selectedQuestionsArray=[]
+  const TotalDuration=300
+  let duration= 0
   for (let i=0; i<5; i++){
-    
     let randomIndex=Math.floor(Math.random() * questions.length)
     selectedQuestion=questions[randomIndex]
-    selectedQuestionsArray.push(selectedQuestion)
+    duration+= selectedQuestion.duration 
+    if (duration >TotalDuration){ i -= 1 }
+    else{selectedQuestionsArray.push(selectedQuestion)}
+    
   }
   
 const response={
@@ -24,7 +28,7 @@ const response={
   isCompleted:false,
   name: "Admission Test",
   totalScore:0,
-  totalDuration:30,
+  totalDuration:TotalDuration,
   questions: selectedQuestionsArray
 }
 
