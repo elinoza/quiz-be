@@ -23,9 +23,11 @@ const response={
   examDate:new Date(),
   isCompleted:false,
   name: "Admission Test",
-  providedAnswer:'',
+  totalScore:0,
+  totalDuration:30,
   questions: selectedQuestionsArray
 }
+
 
     exams.push(response)
     await writeexams(exams)
@@ -33,7 +35,7 @@ const response={
   }
   catch(error){
   console.log(error)
-  const err = new Error("An error occurred while reading from the file")
+  const err = new Error("An error occurred ")
   next(err)
   }
 })
@@ -42,10 +44,20 @@ examsRouter.post("/:id/answer",async (req,res,next)=> {
   try{
     const exams = await getexams()
     const examFound= exams.find ( exam => exam._id === req.params.id )
+
     if (examFound){
-      examFound.questions[0].push({...req.body})
+      const questionIndex = req.body.question
+      const selectedQuestion=examFound.questions[questionIndex]
+      const providedanswer =req.body.answer
+      selectedQuestion.providedAnswer=providedanswer
+      const score=(selectedQuestion.answers[providedanswer].isCorrect) === true ?  20 : 0
+      examFound.totalScore+= score
 
+      console.log(examFound.totalScore)
 
+      await writeexams(exams)
+      res.status(201).send("your answer is posted succesfully baby")
+    
 
     }
     else { 
@@ -54,14 +66,35 @@ examsRouter.post("/:id/answer",async (req,res,next)=> {
       next(err)
     }
     
-   
     }
     catch(error){
     console.log(error)
-    const err = new Error("An error occurred while reading from the file")
+    const err = new Error("An error occurred ")
     next(err)
     }
   })
+
+examsRouter.get("/:id",async (req,res,next)=> {
+    try{
+      const exams = await getexams()
+      const examFound= exams.find ( exam => exam._id === req.params.id )
+  
+      if (examFound){
+        res.send(examFound)
+      }
+      else { 
+        const err = new Error()
+        err.httpStatusCode = 404
+        next(err)
+      }
+      
+      }
+      catch(error){
+      console.log(error)
+      const err = new Error("An error occurred")
+      next(err)
+      }
+    })
 
 
 
