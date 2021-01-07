@@ -3,7 +3,7 @@ const cors = require("cors")
 const listEndpoints = require("express-list-endpoints")
 
 
-// const attendeesRoutes = require("./services/attendees")
+const examsRoutes = require("./services/exams")
 
 
 const {
@@ -14,7 +14,7 @@ const {
 
 const server = express()
 
-const port = process.env.PORT || 3001 
+const port = process.env.PORT || 3005
 
 server.use(express.json())
 
@@ -23,7 +23,7 @@ server.use(cors()) // CROSS ORIGIN RESOURCE SHARING
 //ROUTES
 
 
-// server.use("/attendees", attendeesRoutes)
+ server.use("/exams", examsRoutes)
 
 
 //ERROR HANDLERS
