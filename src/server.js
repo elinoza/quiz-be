@@ -16,9 +16,24 @@ const server = express()
 
 const port = process.env.PORT || 3005
 
+server.use(cors())
 server.use(express.json())
+const whiteList =[ "http://localhost:3000/"]
 
-server.use(cors()) // CROSS ORIGIN RESOURCE SHARING
+const corsOptions ={
+        origin: function (origin, callback) {
+          if (whiteList.indexOf(origin) !== -1) {
+            // allowed
+            callback(null, true)
+          } else {
+            // Not allowed
+            callback(new Error("NOT ALLOWED - CORS ISSUES"))
+          }
+        },
+      }
+ 
+ // CROSS ORIGIN RESOURCE SHARING
+ 
 
 //ROUTES
 

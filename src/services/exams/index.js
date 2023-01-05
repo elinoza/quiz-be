@@ -12,38 +12,19 @@ try{
   const exams = await getexams()
   const questions = await getquestions()
   let selectedQuestionsArray=[]
-  const TotalDuration=900
+
    let duration= 0
+   let randoms =[]
    
-  //  for (let i=0; i<5; i++){
-  //   let randomIndex=Math.floor(Math.random() * questions.length)
-  //   selectedQuestion=questions[randomIndex]
-  //   duration+= selectedQuestion.duration 
-  // selectedQuestionsArray.push(selectedQuestion)
-  // }
-  
-while (selectedQuestionsArray.length<6) { 
- let randomIndex=Math.floor(Math.random() * questions.length)
+   for (let i=0; i<5; i++){
+    let randomIndex=Math.floor(Math.random() * questions.length)
+
     selectedQuestion=questions[randomIndex]
     duration+= selectedQuestion.duration 
-    if (duration < TotalDuration)  {selectedQuestionsArray.push(selectedQuestion)}
- 
-}
-  //let i=0;
-  //  while(duration < 300){
-  //   let randomIndex=Math.floor(Math.random() * questions.length)
-  //   let selectedQuestion=questions[randomIndex]
-    
-  //   if(duration+selectedQuestion.duration<300){
-  //     selectedQuestionsArray.push(selectedQuestion)
-  //     console.log(duration, selectedQuestion.duration)
-  //     duration += selectedQuestion.duration 
-  //     i=i+1
-  //   }
-  //   else{
-  //     if(i=>5){break}
-      
-  //   }
+  selectedQuestionsArray.push(selectedQuestion)
+  questions.splice(randomIndex,1)
+  //console.log("random index",randomIndex,"selected questions length",selectedQuestionsArray.length,"quo length",questions.length)
+  }
   
   
 const response={
@@ -53,12 +34,12 @@ const response={
   isCompleted:false,
   name: "Admission Test",
   totalScore:0,
-  totalDuration:TotalDuration,
+  totalDuration:duration,
   questions: selectedQuestionsArray
 }
     exams.push(response)
     await writeexams(exams)
-    res.status(201).send(response)
+    res.status(200).send(response)
   
 }
   catch(error){
