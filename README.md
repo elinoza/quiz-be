@@ -22,7 +22,7 @@ PORT=3000
 ``
 Note:.env file is not ignored in this project.
 
-##API routes 🚀
+## API routes 🚀
 The following API routes are available:
 
 1. POST /start  :creates a new quiz including 5 randomly selected questions ,triggered by user posting name&surname and clicking start button 
