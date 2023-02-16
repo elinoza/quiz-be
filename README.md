@@ -29,7 +29,7 @@ The following API routes are available:
 2. POST/:id/answer : posting provided answer for each question and calculation of score
 3. GET/:id :submits  returns their score
 
-##File system operations 📁
+## File system operations 📁
 This project uses the fs-extra module for file system operations, which provides additional functionality on top of the built-in fs module. Some of the methods used in this project include:
 
 readJson(): reads a JSON file and returns the parsed JSON object
@@ -43,5 +43,5 @@ Express
 MongoDB
 fs-extra
 
-##Contributing 👥
+## Contributing 👥
 Feel free to submit pull requests and report issues.
