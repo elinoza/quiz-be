@@ -38,10 +38,9 @@ ensureDir(): creates a directory if it does not exist
 remove(): removes a file or directory
 
 ## Technologies used 🚀
-Node.js
-Express
-MongoDB
-fs-extra
+- Node.js
+- Express
+- fs-extra
 
 ## Contributing 👥
 Feel free to submit pull requests and report issues.
