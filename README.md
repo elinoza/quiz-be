@@ -41,7 +41,7 @@ remove(): removes a file or directory
 - Node.js
 - Express
 - fs-extra
-- deployment-> cyclic.sh
+- deployment-> render.com:https://quiz-be-lx0r.onrender.com
 
 ## Contributing 👥
 Feel free to submit pull requests and report issues.
